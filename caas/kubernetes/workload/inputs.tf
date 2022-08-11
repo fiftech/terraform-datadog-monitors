@@ -4,6 +4,18 @@ variable "environment" {
   description = "Architecture environment"
 }
 
+variable "default_tags" {
+  description = "Default tags for monitors"
+  type        = list(string)
+  default     = ["type:caas", "provider:kubernetes", "resource:kubernetes-workload"]
+}
+
+variable "custom_tags" {
+  description = "Custom tags for monitors"
+  type        = list(string)
+  default     = ["team:claranet"]
+}
+
 variable "filter_tags_use_defaults" {
   description = "Use default filter tags convention"
   default     = "true"
