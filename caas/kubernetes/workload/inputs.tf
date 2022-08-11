@@ -4,6 +4,12 @@ variable "environment" {
   description = "Architecture environment"
 }
 
+variable "default_tags" {
+  description = "Default tags for monitors"
+  type        = list(string)
+  default     = ["type:caas", "provider:kubernetes", "resource:kubernetes-workload"]
+}
+
 variable "custom_tags" {
   description = "Custom tags for monitors"
   type        = list(string)
