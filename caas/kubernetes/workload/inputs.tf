@@ -4,6 +4,12 @@ variable "environment" {
   description = "Architecture environment"
 }
 
+variable "custom_tags" {
+  description = "Custom tags for monitors"
+  type        = list(string)
+  default     = ["team:claranet"]
+}
+
 variable "filter_tags_use_defaults" {
   description = "Use default filter tags convention"
   default     = "true"
