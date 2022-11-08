@@ -95,7 +95,7 @@ resource "datadog_monitor" "replica_ready" {
     ${var.replica_ready_time_aggregator}(${var.replica_ready_timeframe}):
       max:kubernetes_state.replicaset.replicas_desired${module.filter-tags.query_alert} by {${local.replica_group_by}} -
       max:kubernetes_state.replicaset.replicas_ready${module.filter-tags.query_alert} by {${local.replica_group_by}}
-    + 1 < ${var.replica_ready_threshold_critical}
+      > ${var.replica_ready_threshold_critical}
 EOQ
 
   monitor_thresholds {
