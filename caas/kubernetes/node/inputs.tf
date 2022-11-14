@@ -372,3 +372,7 @@ variable "volume_inodes_threshold_warning" {
   description = "Volume inodes warning threshold"
 }
 
+variable "volume_group_by" {
+  default     = ["name", "persistentvolumeclaim"]
+  description = "Select group by element on volume monitors"
+}
