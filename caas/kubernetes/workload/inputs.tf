@@ -89,6 +89,11 @@ variable "job_extra_tags" {
   default     = []
 }
 
+variable "job_group_by" {
+  default     = "kube_job"
+  description = "Group by element for job monitor"
+}
+
 variable "job_message" {
   description = "Custom message for Job monitor"
   type        = string
@@ -234,4 +239,3 @@ variable "replica_group_by" {
   default     = ["namespace", "replicaset"]
   description = "Select group by element on monitors"
 }
-
