@@ -22,7 +22,6 @@ EOQ
   notify_audit        = false
   timeout_h           = var.timeout_h
   include_tags        = true
-  locked              = false
   require_full_window = true
 
   tags = concat(module.monitor-tags.tags, var.pod_phase_status_extra_tags)
@@ -53,7 +52,6 @@ EOQ
   notify_audit        = false
   timeout_h           = var.timeout_h
   include_tags        = true
-  locked              = false
   require_full_window = true
 
   tags = concat(module.monitor-tags.tags, var.error_extra_tags)
@@ -84,7 +82,6 @@ EOQ
   notify_audit        = false
   timeout_h           = var.timeout_h
   include_tags        = true
-  locked              = false
   require_full_window = true
 
   tags = concat(module.monitor-tags.tags, var.terminated_extra_tags)

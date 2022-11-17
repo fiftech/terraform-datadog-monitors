@@ -24,7 +24,6 @@ EOQ
   notify_audit        = false
   timeout_h           = var.timeout_h
   include_tags        = true
-  locked              = false
   require_full_window = true
 
   tags = concat(module.monitor-tags.tags, var.ingress_5xx_extra_tags)
@@ -56,7 +55,6 @@ EOQ
   notify_audit        = false
   timeout_h           = var.timeout_h
   include_tags        = true
-  locked              = false
   require_full_window = true
 
   tags = concat(module.monitor-tags.tags, var.ingress_4xx_extra_tags)

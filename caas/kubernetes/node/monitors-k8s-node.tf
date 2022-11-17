@@ -20,7 +20,6 @@ EOQ
   notify_audit        = false
   timeout_h           = var.timeout_h
   include_tags        = true
-  locked              = false
   require_full_window = true
 
   tags = concat(module.monitor-tags.tags, var.disk_pressure_extra_tags)
@@ -48,7 +47,6 @@ EOQ
   notify_audit        = false
   timeout_h           = var.timeout_h
   include_tags        = true
-  locked              = false
   require_full_window = true
 
   tags = concat(module.monitor-tags.tags, var.disk_out_extra_tags)
@@ -76,7 +74,6 @@ EOQ
   notify_audit        = false
   timeout_h           = var.timeout_h
   include_tags        = true
-  locked              = false
   require_full_window = true
 
   tags = concat(module.monitor-tags.tags, var.memory_pressure_extra_tags)
@@ -104,7 +101,6 @@ EOQ
   notify_audit        = false
   timeout_h           = var.timeout_h
   include_tags        = true
-  locked              = false
   require_full_window = true
 
   tags = concat(module.monitor-tags.tags, var.ready_extra_tags)
@@ -133,7 +129,6 @@ EOQ
   notify_audit        = false
   timeout_h           = var.timeout_h
   include_tags        = true
-  locked              = false
   require_full_window = true
 
   tags = concat(module.monitor-tags.tags, var.kubelet_ping_extra_tags)
@@ -161,7 +156,6 @@ EOQ
   notify_audit        = false
   timeout_h           = var.timeout_h
   include_tags        = true
-  locked              = false
   require_full_window = true
 
   tags = concat(module.monitor-tags.tags, var.kubelet_syncloop_extra_tags)
@@ -184,7 +178,6 @@ EOQ
   notify_audit      = false
   timeout_h         = var.timeout_h
   include_tags      = true
-  locked            = false
 
   tags = concat(module.monitor-tags.tags, var.unregister_net_device_extra_tags)
 }
@@ -213,7 +206,6 @@ EOQ
   notify_audit        = false
   timeout_h           = var.timeout_h
   include_tags        = true
-  locked              = false
   require_full_window = true
 
   tags = concat(module.monitor-tags.tags, var.node_unschedulable_extra_tags)
@@ -245,7 +237,6 @@ EOQ
   notify_audit        = false
   timeout_h           = var.timeout_h
   include_tags        = true
-  locked              = false
   require_full_window = true
 
   tags = concat(module.monitor-tags.tags, var.volume_space_extra_tags)
@@ -277,7 +268,6 @@ EOQ
   notify_audit        = false
   timeout_h           = var.timeout_h
   include_tags        = true
-  locked              = false
   require_full_window = true
 
   tags = concat(module.monitor-tags.tags, var.volume_inodes_extra_tags)

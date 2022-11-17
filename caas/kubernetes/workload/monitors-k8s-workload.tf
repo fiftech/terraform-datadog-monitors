@@ -20,7 +20,6 @@ EOQ
   notify_audit        = false
   timeout_h           = var.timeout_h
   include_tags        = true
-  locked              = false
   require_full_window = true
 
   tags = concat(module.monitor-tags.tags, var.job_extra_tags)
@@ -48,7 +47,6 @@ EOQ
   notify_audit        = false
   timeout_h           = var.timeout_h
   include_tags        = true
-  locked              = false
   require_full_window = true
 
   tags = concat(module.monitor-tags.tags, var.cronjob_extra_tags)
@@ -79,7 +77,6 @@ EOQ
   notify_audit        = false
   timeout_h           = var.timeout_h
   include_tags        = true
-  locked              = false
   require_full_window = true
 
   tags = concat(module.monitor-tags.tags, var.replica_available_extra_tags)
@@ -110,7 +107,6 @@ EOQ
   notify_audit        = false
   timeout_h           = var.timeout_h
   include_tags        = true
-  locked              = false
   require_full_window = true
 
   tags = concat(module.monitor-tags.tags, var.replica_ready_extra_tags)
@@ -141,7 +137,6 @@ EOQ
   notify_audit        = false
   timeout_h           = var.timeout_h
   include_tags        = true
-  locked              = false
   require_full_window = true
 
   tags = concat(module.monitor-tags.tags, var.replica_current_extra_tags)
