@@ -119,6 +119,7 @@ Creates DataDog monitors with the following checks:
 | <a name="input_unregister_net_device_threshold_critical"></a> [unregister\_net\_device\_threshold\_critical](#input\_unregister\_net\_device\_threshold\_critical) | Unregister net device critical threshold | `number` | `3` | no |
 | <a name="input_unregister_net_device_time_aggregator"></a> [unregister\_net\_device\_time\_aggregator](#input\_unregister\_net\_device\_time\_aggregator) | Monitor aggregator for Unregister net device [available values: min, max or avg] | `string` | `"min"` | no |
 | <a name="input_unregister_net_device_timeframe"></a> [unregister\_net\_device\_timeframe](#input\_unregister\_net\_device\_timeframe) | Monitor timeframe for Unregister net device [available values: `last_#m` (1, 5, 10, 15, or 30), `last_#h` (1, 2, or 4), or `last_1d`] | `string` | `"15m"` | no |
+| <a name="input_volume_group_by"></a> [volume\_group\_by](#input\_volume\_group_by) | Select group by element on volume monitors | `list(string)` | `"name", "persistentvolumeclaim"` | no |
 | <a name="input_volume_inodes_enabled"></a> [volume\_inodes\_enabled](#input\_volume\_inodes\_enabled) | Flag to enable Volume inodes monitor | `string` | `"true"` | no |
 | <a name="input_volume_inodes_extra_tags"></a> [volume\_inodes\_extra\_tags](#input\_volume\_inodes\_extra\_tags) | Extra tags for Volume inodes monitor | `list(string)` | `[]` | no |
 | <a name="input_volume_inodes_message"></a> [volume\_inodes\_message](#input\_volume\_inodes\_message) | Custom message for Volume inodes monitor | `string` | `""` | no |
