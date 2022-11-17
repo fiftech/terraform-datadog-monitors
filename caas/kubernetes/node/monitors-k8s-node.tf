@@ -227,8 +227,8 @@ resource "datadog_monitor" "volume_space" {
 
   query = <<EOQ
     ${var.volume_space_time_aggregator}(${var.volume_space_timeframe}):
-      avg:kubernetes.kubelet.volume.stats.used_bytes${module.filter-tags.query_alert} by {name,persistentvolumeclaim} /
-      avg:kubernetes.kubelet.volume.stats.capacity_bytes${module.filter-tags.query_alert} by {name,persistentvolumeclaim}
+      avg:kubernetes.kubelet.volume.stats.used_bytes${module.filter-tags.query_alert} by {${local.volume_group_by}} /
+      avg:kubernetes.kubelet.volume.stats.capacity_bytes${module.filter-tags.query_alert} by {${local.volume_group_by}}
     * 100 > ${var.volume_space_threshold_critical}
 EOQ
 
@@ -259,8 +259,8 @@ resource "datadog_monitor" "volume_inodes" {
 
   query = <<EOQ
     ${var.volume_inodes_time_aggregator}(${var.volume_inodes_timeframe}):
-      avg:kubernetes.kubelet.volume.stats.inodes_used${module.filter-tags.query_alert} by {name,persistentvolumeclaim} /
-      avg:kubernetes.kubelet.volume.stats.inodes${module.filter-tags.query_alert} by {name,persistentvolumeclaim}
+      avg:kubernetes.kubelet.volume.stats.inodes_used${module.filter-tags.query_alert} by {${local.volume_group_by}} /
+      avg:kubernetes.kubelet.volume.stats.inodes${module.filter-tags.query_alert} by {${local.volume_group_by}}
     * 100 > ${var.volume_inodes_threshold_critical}
 EOQ
 
