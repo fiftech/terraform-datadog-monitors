@@ -76,6 +76,7 @@ Creates DataDog monitors with the following checks:
 | <a name="module_filter-tags-client-other-error-blob"></a> [filter-tags-client-other-error-blob](#module\_filter-tags-client-other-error-blob) | ../../../common/filter-tags | n/a |
 | <a name="module_filter-tags-network-error"></a> [filter-tags-network-error](#module\_filter-tags-network-error) | ../../../common/filter-tags | n/a |
 | <a name="module_filter-tags-server-other-error"></a> [filter-tags-server-other-error](#module\_filter-tags-server-other-error) | ../../../common/filter-tags | n/a |
+| <a name="module_filter-tags-status"></a> [filter-tags-status](#module\_filter-tags-status) | ../../../common/filter-tags | n/a |
 | <a name="module_filter-tags-success"></a> [filter-tags-success](#module\_filter-tags-success) | ../../../common/filter-tags | n/a |
 | <a name="module_filter-tags-success-blob"></a> [filter-tags-success-blob](#module\_filter-tags-success-blob) | ../../../common/filter-tags | n/a |
 | <a name="module_filter-tags-throttling-error"></a> [filter-tags-throttling-error](#module\_filter-tags-throttling-error) | ../../../common/filter-tags | n/a |
@@ -157,6 +158,7 @@ Creates DataDog monitors with the following checks:
 | <a name="input_latency_time_aggregator"></a> [latency\_time\_aggregator](#input\_latency\_time\_aggregator) | Monitor aggregator for Storage latency [available values: min, max or avg] | `string` | `"min"` | no |
 | <a name="input_latency_timeframe"></a> [latency\_timeframe](#input\_latency\_timeframe) | Monitor timeframe for Storage latency [available values: `last_#m` (1, 5, 10, 15, or 30), `last_#h` (1, 2, or 4), or `last_1d`] | `string` | `"last_5m"` | no |
 | <a name="input_message"></a> [message](#input\_message) | Message sent when a Redis monitor is triggered | `any` | n/a | yes |
+| <a name="input_minimum_traffic"></a> [minimum\_traffic](#input\_minimum\_traffic) | Minimum traffic to have for requests status alerts to avoid false triggering. | `number` | `20` | no |
 | <a name="input_network_error_requests_enabled"></a> [network\_error\_requests\_enabled](#input\_network\_error\_requests\_enabled) | Flag to enable Storage network errors monitor | `string` | `"true"` | no |
 | <a name="input_network_error_requests_extra_tags"></a> [network\_error\_requests\_extra\_tags](#input\_network\_error\_requests\_extra\_tags) | Extra tags for Storage network errors monitor | `list(string)` | `[]` | no |
 | <a name="input_network_error_requests_message"></a> [network\_error\_requests\_message](#input\_network\_error\_requests\_message) | Custom message for Storage network errors monitor | `string` | `""` | no |

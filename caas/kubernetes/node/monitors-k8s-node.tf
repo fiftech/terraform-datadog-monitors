@@ -5,7 +5,7 @@ resource "datadog_monitor" "disk_pressure" {
   type    = "service check"
 
   query = <<EOQ
-    "kubernetes_state.node.disk_pressure"${module.filter-tags.service_check}.by("node").last(6).count_by_status()
+    "kubernetes_state.node.disk_pressure"${module.filter-tags.service_check}.by("node","kube_cluster_name").last(6).count_by_status()
 EOQ
 
   monitor_thresholds {
@@ -32,7 +32,7 @@ resource "datadog_monitor" "disk_out" {
   type    = "service check"
 
   query = <<EOQ
-    "kubernetes_state.node.out_of_disk"${module.filter-tags.service_check}.by("node").last(6).count_by_status()
+    "kubernetes_state.node.out_of_disk"${module.filter-tags.service_check}.by("node","kube_cluster_name").last(6).count_by_status()
 EOQ
 
   monitor_thresholds {
@@ -59,7 +59,7 @@ resource "datadog_monitor" "memory_pressure" {
   type    = "service check"
 
   query = <<EOQ
-    "kubernetes_state.node.memory_pressure"${module.filter-tags.service_check}.by("node").last(6).count_by_status()
+    "kubernetes_state.node.memory_pressure"${module.filter-tags.service_check}.by("node","kube_cluster_name").last(6).count_by_status()
 EOQ
 
   monitor_thresholds {
@@ -86,7 +86,7 @@ resource "datadog_monitor" "ready" {
   type    = "service check"
 
   query = <<EOQ
-    "kubernetes_state.node.ready"${module.filter-tags.service_check}.by("node").last(6).count_by_status()
+    "kubernetes_state.node.ready"${module.filter-tags.service_check}.by("node","kube_cluster_name").last(6).count_by_status()
 EOQ
 
   monitor_thresholds {
@@ -113,7 +113,7 @@ resource "datadog_monitor" "kubelet_ping" {
   type    = "service check"
 
   query = <<EOQ
-    "kubernetes.kubelet.check.ping"${module.filter-tags.service_check}.by("name").last(6).count_by_status()
+    "kubernetes.kubelet.check.ping"${module.filter-tags.service_check}.by("name","kube_cluster_name").last(6).count_by_status()
 EOQ
 
   monitor_thresholds {
@@ -141,7 +141,7 @@ resource "datadog_monitor" "kubelet_syncloop" {
   type    = "service check"
 
   query = <<EOQ
-    "kubernetes.kubelet.check.syncloop"${module.filter-tags.service_check}.by("name").last(6).count_by_status()
+    "kubernetes.kubelet.check.syncloop"${module.filter-tags.service_check}.by("name","kube_cluster_name").last(6).count_by_status()
 EOQ
 
   monitor_thresholds {
@@ -165,14 +165,11 @@ resource "datadog_monitor" "unregister_net_device" {
   count   = var.unregister_net_device_enabled == "true" ? 1 : 0
   name    = "${coalesce(var.name_prefix, "${var.prefix_slug == "" ? "" : "[${var.prefix_slug}]"}[${var.environment}]")} Kubernetes Node Frequent unregister net device"
   message = coalesce(var.unregister_net_device_message, var.message)
-  type    = "event alert"
+  type    = "event-v2 alert"
 
-  query = <<EOQ
-    events('sources:kubernetes priority:all ${module.filter-tags.event_alert} \"UnregisterNetDevice\"').rollup('count').last('${var.unregister_net_device_timeframe}') > ${var.unregister_net_device_threshold_critical}
-EOQ
+  query = "events(\"sources:kubernetes ${module.filter-tags.event_alert} \"UnregisterNetDevice\"\").rollup(\"count\").last(\"${var.unregister_net_device_timeframe}\") >= ${var.unregister_net_device_threshold_critical}"
 
   new_host_delay    = var.new_host_delay
-  new_group_delay   = var.new_group_delay
   notify_no_data    = false
   renotify_interval = 0
   notify_audit      = false
@@ -190,7 +187,7 @@ resource "datadog_monitor" "node_unschedulable" {
 
   query = <<EOQ
     ${var.node_unschedulable_time_aggregator}(${var.node_unschedulable_timeframe}):
-      sum:kubernetes_state.node.status${module.filter-tags-unschedulable.query_alert} by {node}
+      sum:kubernetes_state.node.status${module.filter-tags-unschedulable.query_alert} by {node,kube_cluster_name}
     > 0
 EOQ
 
@@ -219,8 +216,8 @@ resource "datadog_monitor" "volume_space" {
 
   query = <<EOQ
     ${var.volume_space_time_aggregator}(${var.volume_space_timeframe}):
-      avg:kubernetes.kubelet.volume.stats.used_bytes${module.filter-tags.query_alert} by {${local.volume_group_by}} /
-      avg:kubernetes.kubelet.volume.stats.capacity_bytes${module.filter-tags.query_alert} by {${local.volume_group_by}}
+      avg:kubernetes.kubelet.volume.stats.used_bytes${module.filter-tags.query_alert} by {name,persistentvolumeclaim,kube_cluster_name} /
+      avg:kubernetes.kubelet.volume.stats.capacity_bytes${module.filter-tags.query_alert} by {name,persistentvolumeclaim,kube_cluster_name}
     * 100 > ${var.volume_space_threshold_critical}
 EOQ
 
@@ -250,8 +247,8 @@ resource "datadog_monitor" "volume_inodes" {
 
   query = <<EOQ
     ${var.volume_inodes_time_aggregator}(${var.volume_inodes_timeframe}):
-      avg:kubernetes.kubelet.volume.stats.inodes_used${module.filter-tags.query_alert} by {${local.volume_group_by}} /
-      avg:kubernetes.kubelet.volume.stats.inodes${module.filter-tags.query_alert} by {${local.volume_group_by}}
+      avg:kubernetes.kubelet.volume.stats.inodes_used${module.filter-tags.query_alert} by {name,persistentvolumeclaim,kube_cluster_name} /
+      avg:kubernetes.kubelet.volume.stats.inodes${module.filter-tags.query_alert} by {name,persistentvolumeclaim,kube_cluster_name}
     * 100 > ${var.volume_inodes_threshold_critical}
 EOQ
 
@@ -272,4 +269,3 @@ EOQ
 
   tags = concat(module.monitor-tags.tags, var.volume_inodes_extra_tags)
 }
-
