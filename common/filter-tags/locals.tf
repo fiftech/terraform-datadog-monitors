@@ -39,7 +39,7 @@ locals {
   excluding_string = join(local.filter_tags_separator, local.excluding_list)
 
   filter_tags_not_operator = var.filter_tags_separator == "AND" ? "NOT " : "!"
-  filter_tags_separator    = var.filter_tags_separator == "AND" ? " AND " : ","
+  filter_tags_separator    = var.filter_tags_separator == "AND" ? " AND " : var.filter_tags_separator == "OR" ? " OR " : ","
 
   query_alert = join(
     local.filter_tags_separator,
