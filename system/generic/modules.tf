@@ -21,3 +21,9 @@ module "filter-tags-disk" {
   filter_tags_separator       = var.filter_tags_separator
 }
 
+module "monitor-tags" {
+  source = "../../common/monitor-tags"
+
+  environment = var.environment
+  extra_tags  = var.extra_tags
+}
